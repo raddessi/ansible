@@ -1,0 +1,9 @@
+- hosts: testhost
+  module_defaults:
+    ansible.builtin.gather_facts:
+      gather_subset: ["!all"]  # can be changed to  ["!all", "hardware"] to resolve the issue
+  tasks:
+    - name: ensure facts are gathered
+      assert:
+        that:
+            - ansible_facts is defined and 'fqdn' in ansible_facts

@@ -1,0 +1,9 @@
+- hosts: testhost
+  module_defaults:
+    ansible.builtin.gather_facts:
+      gather_subset: ["hardware"]
+  tasks:
+    - name: ensure the hardware facts are present
+      assert:
+        that:
+            - ansible_facts is defined and 'processor_cores' in ansible_facts
